@@ -1,0 +1,41 @@
+# In this project, I downloaded Spotify data from Kaggle and created a table to insert the date into.
+
+CREATE TABLE BIT_DB.Spotifydata (
+id integer PRIMARY KEY,
+artist_name varchar NOT NULL,
+track_name varchar NOT NULL,
+track_id varchar NOT NULL,
+popularity integer NOT NULL,
+danceability decimal(4,3) NOT NULL,
+energy decimal(4,3) NOT NULL,
+key integer NOT NULL,
+loudness decimal(5,3) NOT NULL,
+mode integer NOT NULL,
+speechiness decimal(5,4) NOT NULL,
+acousticness decimal(6,5) NOT NULL,
+instrumentalness text NOT NULL,
+liveness decimal(5,4) NOT NULL,
+valence decimal(4,3) NOT NULL,
+tempo decimal(6,3) NOT NULL,
+duration_ms integer NOT NULL,
+time_signature integer NOT NULL 
+)
+
+#Then inserted the .csv into the table
+#After, I used the following SQL to further explore and analyze the data
+
+#Who are the top 20 artists in order of popularity
+SELECT artist_name, popularity
+FROM BIT_DB.Spotifydata
+ORDER BY popularity desc
+LIMIT 20
+
+#Calculate the avg energy of the track_name 
+SELECT AVG(energy)
+FROM BIT_DB.Spotifydata
+
+#Last, I determined which artist and tracks have a duration_ms > 2000000
+SELECT artist_name, track_name, MIN(duration_ms)
+FROM BIT_DB.Spotifydata
+WHERE duration_ms > 200000
+GROUP BY artist_name
